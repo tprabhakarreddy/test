@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "CloudFormation template to launch an EC2 instance using a specified AMI, instance type, and key name."
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: "ami-07d9cf938edb0739b"  # AMI ID
+      InstanceType: "t2.micro"          # Instance Type
+      KeyName: "newkey"                 # Key Pair Name
+      Tags:
+        - Key: Name
+          Value: "MyEC2Instance"
+
+Outputs:
+  InstanceId:
+    Description: "The ID of the created EC2 instance."
+    Value: !Ref EC2Instance
+
+  PublicIP:
+    Description: "The public IP address of the EC2 instance."
+    Value: !GetAtt EC2Instance.PublicIp
